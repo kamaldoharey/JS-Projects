@@ -3,14 +3,12 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Simple calculator</title>
+		<title>Simple Calculator</title>
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
 		<section id="main">
-			<!-- input area -->
-			<section id="inpur__area">
-				<!-- Some basic HTML elements -->
+			<section id="input__area">
 				<h1>Enter value</h1>
 				<label for="firstValue">Enter first value</label>
 				<input type="text" id="firstValue" />
@@ -19,65 +17,117 @@
 				<input type="text" id="secondValue" />
 				<br />
 			</section>
-			<!-- Buttons -->
+
 			<section id="button__area">
 				<input type="button" id="submitPlus" value="+" />
 				<input type="button" id="submitMinus" value="-" />
-				<input type="button" id="submitMinus" value="X" />
+				<input type="button" id="submitMulti" value="X" />
 				<input type="button" id="submitDiv" value="/" />
 			</section>
+
 			<section id="result__sarea">
 				<p id="result__para"></p>
 			</section>
 		</section>
 
 		<script>
-			// Get the button and paragraph from HTML using their IDs
 			const btnPlus = document.querySelector('#submitPlus');
 			const btnMinus = document.querySelector('#submitMinus');
 			const btnMulti = document.querySelector('#submitMulti');
 			const btnDiv = document.querySelector('#submitDiv');
 			const p1 = document.querySelector('#result__para');
 
-			// Add a click event listener to the button
-			// We use async because we're going to wait for a promise
 			btnPlus.addEventListener('click', async function () {
-				// Read values from input fields and convert them to numbers
 				let num1 = parseFloat(document.getElementById('firstValue').value);
 				let num2 = parseFloat(document.getElementById('secondValue').value);
 
-				// Try to add the numbers
 				try {
-					// Wait for the result of our addNum function
 					const result = await addNum(num1, num2);
-					// Show the result in the paragraph
 					p1.innerHTML = `Result : ${result}`;
 				} catch (error) {
-					// If something goes wrong, show an error message
 					p1.innerHTML = error;
 				}
 			});
 
-			// This is our function that returns a Promise
-			// Plus (+) logic
 			function addNum(a, b) {
 				return new Promise((resolve, reject) => {
-					// Check if both inputs are valid numbers
 					if (!isNaN(a) && !isNaN(b)) {
-						// If yes, add them and send back the result
 						resolve(a + b);
 					} else {
-						// If not, reject with an error message
-						reject('something wrong happen');
+						reject('Something went wrong');
 					}
 				});
 			}
-			// TODO: make other functions for the other operations
-			// minus (-) logic
-			// multiply (X) logic
-			// Divide (/) logic
-			// error: something wrong happen
+
+			btnMinus.addEventListener('click', async function () {
+				let num1 = parseFloat(document.getElementById('firstValue').value);
+				let num2 = parseFloat(document.getElementById('secondValue').value);
+
+				try {
+					const result = await subtractNum(num1, num2);
+					p1.innerHTML = `Result : ${result}`;
+				} catch (error) {
+					p1.innerHTML = error;
+				}
+			});
+
+			function subtractNum(a, b) {
+				return new Promise((resolve, reject) => {
+					if (!isNaN(a) && !isNaN(b)) {
+						resolve(a - b);
+					} else {
+						reject('Something went wrong');
+					}
+				});
+			}
+
+			btnMulti.addEventListener('click', async function () {
+				let num1 = parseFloat(document.getElementById('firstValue').value);
+				let num2 = parseFloat(document.getElementById('secondValue').value);
+
+				try {
+					const result = await multiplyNum(num1, num2);
+					p1.innerHTML = `Result : ${result}`;
+				} catch (error) {
+					p1.innerHTML = error;
+				}
+			});
+
+			function multiplyNum(a, b) {
+				return new Promise((resolve, reject) => {
+					if (!isNaN(a) && !isNaN(b)) {
+						resolve(a * b);
+					} else {
+						reject('Something went wrong');
+					}
+				});
+			}
+
+			btnDiv.addEventListener('click', async function () {
+				let num1 = parseFloat(document.getElementById('firstValue').value);
+				let num2 = parseFloat(document.getElementById('secondValue').value);
+
+				try {
+					const result = await divideNum(num1, num2);
+					p1.innerHTML = `Result : ${result}`;
+				} catch (error) {
+					p1.innerHTML = error;
+				}
+			});
+
+			function divideNum(a, b) {
+				return new Promise((resolve, reject) => {
+					if (!isNaN(a) && !isNaN(b)) {
+						if (b === 0) {
+							reject('Cannot divide by zero');
+						} else {
+							resolve(a / b);
+						}
+					} else {
+						reject('Something went wrong');
+					}
+				});
+			}
 		</script>
 	</body>
 </html>
-<!-- end of line -->
