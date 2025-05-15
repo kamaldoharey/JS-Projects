@@ -1,107 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Basic Calculator</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 50px;
-        background-color: #f4f4f4;
-      }
-      .container {
-        background: white;
-        padding: 20px 30px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 320px;
-        margin: auto;
-      }
-      h2 {
-        text-align: center;
-      }
-      input[type="number"] {
-        width: 100%;
-        padding: 8px;
-        margin: 8px 0;
-        box-sizing: border-box;
-      }
-      .buttons {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-top: 10px;
-      }
-      button {
-        padding: 10px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-      }
-      button:hover {
-        background-color: #0056b3;
-      }
-      .result {
-        margin-top: 15px;
-        font-weight: bold;
-        text-align: center;
-        font-size: 18px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h2>Calculator</h2>
-      <input type="number" id="num1" placeholder="Enter first number" />
-      <input type="number" id="num2" placeholder="Enter second number" />
-      <div class="buttons">
-        <button onclick="calculate('add')">Add</button>
-        <button onclick="calculate('subtract')">Subtract</button>
-        <button onclick="calculate('multiply')">Multiply</button>
-        <button onclick="calculate('divide')">Divide</button>
-      </div>
-      <div class="result" id="result"></div>
-    </div>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Basic Calculator</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h2>Calculator</h2>
+			<input type="number" id="num1" placeholder="Enter first number" />
+			<input type="number" id="num2" placeholder="Enter second number" />
+			<div class="buttons">
+				<button onclick="calculate('add')">Add</button>
+				<button onclick="calculate('subtract')">Subtract</button>
+				<button onclick="calculate('multiply')">Multiply</button>
+				<button onclick="calculate('divide')">Divide</button>
+			</div>
+			<div class="result" id="result"></div>
+		</div>
 
-    <script>
-      function calculate(operation) {
-        const num1 = parseFloat(document.getElementById("num1").value);
-        const num2 = parseFloat(document.getElementById("num2").value);
-        const resultDiv = document.getElementById("result");
+		<script>
+			function calculate(operation) {
+				const num1 = parseFloat(document.getElementById('num1').value);
+				const num2 = parseFloat(document.getElementById('num2').value);
+				const resultDiv = document.getElementById('result');
 
-        if (isNaN(num1) || isNaN(num2)) {
-          resultDiv.innerText = "Please enter valid numbers.";
-          return;
-        }
+				if (isNaN(num1) || isNaN(num2)) {
+					resultDiv.innerText = 'Please enter valid numbers.';
+					return;
+				}
 
-        let result;
-        switch (operation) {
-          case "add":
-            result = num1 + num2;
-            break;
-          case "subtract":
-            result = num1 - num2;
-            break;
-          case "multiply":
-            result = num1 * num2;
-            break;
-          case "divide":
-            if (num2 === 0) {
-              resultDiv.innerText = "Cannot divide by zero.";
-              return;
-            }
-            result = num1 / num2;
-            break;
-          default:
-            resultDiv.innerText = "Unknown operation.";
-            return;
-        }
+				let result;
+				switch (operation) {
+					case 'add':
+						result = num1 + num2;
+						break;
+					case 'subtract':
+						result = num1 - num2;
+						break;
+					case 'multiply':
+						result = num1 * num2;
+						break;
+					case 'divide':
+						if (num2 === 0) {
+							resultDiv.innerText = 'Cannot divide by zero.';
+							return;
+						}
+						result = num1 / num2;
+						break;
+					default:
+						resultDiv.innerText = 'Unknown operation.';
+						return;
+				}
 
-        resultDiv.innerText = "Result: " + result;
-      }
-    </script>
-  </body>
+				resultDiv.innerText = 'Result: ' + result;
+			}
+		</script>
+	</body>
 </html>
